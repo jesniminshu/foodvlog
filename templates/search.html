@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>Sislaf</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'hmpg/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+
+
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    
+    <section id="introblocks">
+      <div class="container">
+          <ul class="row nospace group btmspace-80 list-unstyled">
+              <!-- Image Item 1 -->
+              {% for i in pr %}
+              <li class="col-sm-6 mb-4">
+                  <figure>
+                      <a class="imgover" href="{{i.get_url}}">
+                          <img src="{{i.img.url}}" alt="" class="img-fluid" style="height:300px;width:300px">
+                      </a>
+                      <figcaption>
+                          <h6 class="heading">{{i.name}}</h6>
+                          <p>{{i.desc|truncatewords:17}}</p>
+                          <br>
+                          <p>price: {{i.price}}Rs</p>
+                          <br>
+                          <p>Stock Left: {{i.stock}}</p>
+                      </figcaption>
+                  </figure>
+              </li>
+              {% endfor %}
+              <!-- Image Item 2 -->
+              
+              <!-- Add more image items as needed -->
+          </ul>
+      </div>
+  </section>
+     <!-- ################################################################################################ -->
+    <hr class="btmspace-80">
+    <!-- ################################################################################################ -->
+    
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+
+<!-- ################################################################################################ -->
+
+
+
+<!-- JAVASCRIPTS -->
+<script src="{% static 'hmpg/layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'hmpg/layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'hmpg/layout/scripts/jquery.mobilemenu.js' %}"></script>
+</body>
+</html>
+{% endblock %}

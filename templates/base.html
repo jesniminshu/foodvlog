@@ -1,0 +1,65 @@
+{% load static %}
+
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>Sislaf</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'hmpg/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+  
+<!-- ################################################################################################ -->
+<div class="bgded overlay" style="background-image:url('{% static 'hmpg/images/demo/backgrounds/bg2.jpg' %}');">
+ 
+<!-- Top Background Image Wrapper -->
+
+ 
+  <!-- ################################################################################################ -->
+  
+      
+      
+    
+  <!-- ################################################################################################ -->
+  
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left"> 
+        <!-- ################################################################################################ -->
+        <h1><a href="/">ELAN FOODS</a></h1>
+        <!-- ################################################################################################ -->
+      </div>
+      <nav id="mainav" class="fl_right"> 
+        <!-- ################################################################################################ -->
+        <ul class="clear">
+          <li class="active"><a href="/">Home</a></li>
+          {% if user.is_authenticated %}
+              <li class="active">Hai {{ user.username }}</li>
+              <li class="active"><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+              <li class="active"><a href="{% url 'register' %}">Register</a></li>
+              <li class="active"><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+          <li class="active">
+              <a href="{% url 'cartdetails' %}">
+                  <i class="fa fa-shopping-cart" style="font-size:14px">&nbsp;{{ itc }}</i>
+              </a>
+          </li>
+      </ul>
+        <!-- ################################################################################################ -->
+      </nav>
+    </header>
+  </div>
+</div>
+{% block content %}
+{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+
+</html>
