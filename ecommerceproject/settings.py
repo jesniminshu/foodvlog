@@ -80,10 +80,15 @@ WSGI_APPLICATION = 'ecommerceproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ecommerce',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',  # or the IP of your database server
+        'PORT': '3306',       # default MySQL port
     }
 }
+
 
 
 # Password validation

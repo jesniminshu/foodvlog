@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect,get_object_or_404
 from . models import *
 from shop . models import *
 from django.core.exceptions import ObjectDoesNotExist
+from .forms import CheckoutForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def cart_details(request, tot=0, count=0):
@@ -62,4 +64,40 @@ def cart_delete(request,product_id):
     c_items=items.objects.get(prodt=prod,cart=ct)
     c_items.delete()
     return redirect("cartdetails")
+
+
+@login_required
+def checkout_view(request):
+    form = CheckoutForm()
+    cart_items = items.objects.filter(cart__cart_id=c_id(request), active=True)
+    total = sum(item.prodt.price * item.quantity for item in cart_items)
+
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            order = Order.objects.create(
+                user=request.user,
+                shipping_address=form.cleaned_data['address'],
+                city=form.cleaned_data['city'],
+                state=form.cleaned_data['state'],
+                zip_code=form.cleaned_data['zip_code'],
+                total_amount=total,
+            )
+
+            for item in cart_items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item.prodt,
+                    quantity=item.quantity
+                )
+                item.delete()  # Remove items from the cart after they’re added to the order
+
+            return redirect('order_confirmation', order_id=order.id)
+
+    return render(request, 'checkout.html', {'form': form, 'cart_items': cart_items, 'total': total})
+
+def order_confirmation(request, order_id):
+    order = Order.objects.get(id=order_id)
+    return render(request, 'order_confirmation.html', {'order': order})
+
 

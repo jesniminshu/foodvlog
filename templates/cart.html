@@ -73,15 +73,17 @@ label {
 }
 
 .btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  width: 100%;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 17px;
+  background-color: #04AA6D; /* Button background color */
+    color: white; /* Button text color */
+    padding: 12px; /* Padding inside the button */
+    margin: 10px 0; /* Margin around the button */
+    border: none; /* Remove border */
+    width: 100%; /* Full width */
+    border-radius: 3px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 17px; /* Font size */
+    text-align: center; /* Center text */
+    display: inline-block; /* Allow width to be set */
 }
 
 .btn:hover {
@@ -128,6 +130,7 @@ span.price {
 
 {% endfor %}
 <div></div><p><span class="price" style="color:white; background-color: red;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Total: ${{t}}</b></span></p><div></div>
+<a href="{% url 'checkout' %}" class="btn">Place Order</a>
 <br><br><br>
 </body>
 </html>
